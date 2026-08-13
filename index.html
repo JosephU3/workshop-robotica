@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop: IA Embarcada e Robótica | UFABC</title>
+    <!-- Favicon com o ícone do braço -->
+    <link rel="icon" type="image/png" href="Imagens/Icone_braco.png">
+    <style>
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --accent: #d81b60;
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-muted: #666666;
+            --border: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header / Banner */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .badge-free {
+            background-color: var(--accent);
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .badge-level {
+            background-color: #0284c7;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Container Main */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Information Cards Top Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            padding: 1.4rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p {
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+
+        .info-card ul {
+            padding-left: 1.2rem;
+            font-size: 0.88rem;
+            margin-top: 0.3rem;
+        }
+
+        .notice-box {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            color: #856404;
+            padding: 1.2rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .notice-box ul {
+            margin-top: 0.4rem;
+            padding-left: 1.2rem;
+        }
+
+        /* Sections Header with Custom Image Icon */
+        section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title img.section-icon {
+            width: 28px;
+            height: 28px;
+            vertical-align: middle;
+            object-fit: contain;
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .img-container {
+            text-align: center;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .img-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Components Showcase */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .component-card {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .component-card img {
+            max-height: 140px;
+            object-fit: contain;
+            margin-bottom: 0.8rem;
+        }
+
+        .component-card h4 {
+            color: var(--primary-light);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .component-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Pipeline Flowchart / Process Blocks */
+        .pipeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid var(--primary-light);
+            border-radius: 8px;
+            padding: 1.2rem;
+            gap: 1.2rem;
+            position: relative;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .step-content p {
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #475569;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-top: 0.4rem;
+        }
+
+        /* Call to Action Button */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            border: 2px dashed var(--primary-light);
+        }
+
+        .btn-register {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+            padding: 1.1rem 2.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(216, 27, 96, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-register:hover {
+            background-color: #c2185b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(216, 27, 96, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Banner -->
+    <header>
+        <span class="badge-free">Curso 100% Gratuito · UFABC</span>
+        <span class="badge-level">Nível Iniciante</span>
+        <h1>Workshop de Inteligência Artificial Embarcada e Robótica:<br>Braço Robótico Controlado por Gestos</h1>
+        <p>Aprenda a controlar um Braço Robótico por Gestos utilizando Arduino e Aprendizado de Máquina (TinyML)</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Info Grid -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📍 Localização</h3>
+                <p><strong>Laboratório L401-1, Bloco A</strong><br>Campus Santo André – UFABC<br>Av. dos Estados, 5001 - Bangu</p>
+            </div>
+            <div class="info-card">
+                <h3>📅 Data e Horário</h3>
+                <p><strong>Sábado, 15 de Agosto</strong><br>Horário: <strong>08h00 às 12h00</strong><br>Carga horária: 4 horas (Prático)</p>
+            </div>
+            <div class="info-card">
+                <h3>🎯 Público-Alvo</h3>
+                <p><strong>Comunidade Interna:</strong></p>
+                <ul>
+                    <li>Alunos de Graduação das Engenharias (UFABC)</li>
+                </ul>
+                <p style="margin-top: 0.4rem;"><strong>Comunidade Externa:</strong></p>
+                <ul>
+                    <li>Alunos do Ensino Médio de escolas públicas e privadas</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>👥 Vagas & Nível</h3>
+                <p><strong>Total: 30 vagas</strong></p>
+                <p style="margin-top: 0.3rem;"><strong>Nível:</strong> Totalmente focado em <strong>Iniciantes</strong> (não exige pré-requisitos).</p>
+            </div>
+        </div>
+
+        <!-- Caixa de Aviso sobre Prazos e Critério de Seleção -->
+        <div class="notice-box">
+            <span style="font-size: 1.6rem; margin-top: -2px;">📝</span>
+            <div>
+                <strong>Informações Importantes sobre as Inscrições:</strong>
+                <ul>
+                    <li><strong>Período de Inscrição:</strong> De <strong>13/08 a 14/08 (até às 23h)</strong>.</li>
+                    <li><strong>Critério de Preenchimento:</strong> As inscrições serão confirmadas por <strong>ordem de inscrição</strong> até o limite das 30 vagas.</li>
+                    <li>Aguarde a confirmação oficial da sua inscrição via e-mail após o preenchimento do formulário.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Visão Geral do Projeto -->
+        <section>
+            <h2 class="section-title">
+                <img src="Imagens/Icone_braco.png" alt="Ícone Braço" class="section-icon">
+                Sobre o Workshop
+            </h2>
+            <div class="about-grid">
+                <div>
+                    <p>O workshop é planejado especificamente para o público <strong>iniciante</strong> e visa desmistificar a <strong>Inteligência Artificial Embarcada (TinyML)</strong> através do controle de um <strong>braço robótico articulado em MDF</strong> acionado por <strong>gestos do pulso</strong>.</p>
+                    <br>
+                    <p>Durante a aula, os alunos aprenderão passo a passo a capturar movimentos humanos com o sensor MPU6050, treinar um modelo simples de Aprendizado de Máquina e embarcar o código no Arduino Uno. O robô executará tarefas automáticas ao reconhecer os padrões de movimento em tempo real.</p>
+                </div>
+                <div class="img-container">
+                    <img src="Imagens/braco_robo_2.jpg" alt="Braço Robótico em MDF montado com Arduino">
+                    <div class="img-caption">Figura 1: Kit do Braço Robótico em MDF acionado por microservomotores e controlado por Arduino Uno.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Componentes Principais -->
+        <section>
+            <h2 class="section-title">
+                <img src="Imagens/Icone_braco.png" alt="Ícone Braço" class="section-icon">
+                Hardware & Componentes Utilizados
+            </h2>
+            <p>Aprenda na prática como integrar sensores inerciais e atuadores mecânicos:</p>
+            <div class="components-grid">
+                <div class="component-card">
+                    <img src="Imagens/MPU-6050.webp" alt="Sensor MPU6050">
+                    <h4>Módulo MPU6050</h4>
+                    <p>Acelerômetro e Giroscópio de 6 eixos responsável por capturar os gestos do pulso do usuário.</p>
+                </div>
+                <div class="component-card">
+                    <img src="Imagens/micro-servo-motor.jpg" alt="Microservomotor SG90">
+                    <h4>Microservomotores SG90</h4>
+                    <p>4 motores responsáveis pela articulação da base, elevação, projeção e garra do braço.</p>
+                </div>
+                <div class="component-card">
+                    <img src="Imagens/braco_robo.jfif" alt="Braço Robótico MDF">
+                    <h4>Estrutura MDF 4-DOF</h4>
+                    <p>Chassi mecânico leve e articulado para tarefas de manipulação de objetos (<em>pick and place</em>).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fluxo de Implementação (Pipeline do Curso) -->
+        <section>
+            <h2 class="section-title">
+                <img src="Imagens/Icone_braco.png" alt="Ícone Braço" class="section-icon">
+                Fluxo de Aprendizado e Implementação
+            </h2>
+            <p>O workshop ensina de forma guiada o ciclo de um projeto real de <strong>Inteligência Artificial Embarcada (TinyML)</strong> em 4 etapas acessíveis:</p>
+
+            <div class="pipeline-container">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Coleta de Dados de Gestos (Sensoriamento)</h4>
+                        <p>Uso do MPU6050 fixado ao pulso para capturar variações de aceleração e rotação. Os dados são enviados via Serial e organizados em um arquivo <code>.csv</code>.</p>
+                        <span class="step-badge">Hardware: MPU6050 + Arduino | Software: Python (pyserial)</span>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Treinamento do Modelo de IA no PC</h4>
+                        <p>Processamento do dataset e treinamento de um classificador leve de Aprendizado de Máquina (Árvore de Decisão / k-NN) para distinguir os 4 gestos-comando.</p>
+                        <span class="step-badge">Software: Python (scikit-learn, pandas, Google Colab)</span>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Transpilação e Deploy no Arduino (TinyML)</h4>
+                        <p>Conversão automática do modelo treinado em código C++ nativo e gravação no Arduino Uno SMD (que possui 2KB de RAM).</p>
+                        <span class="step-badge">Ferramenta: micromlgen + Arduino IDE</span>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Atuação Robótica & Demonstração Prática</h4>
+                        <p>Cada gesto reconhecido em tempo real dispara sequências pré-programadas de movimentos nos microservomotores, executando a tarefa de pegar e transportar o objeto.</p>
+                        <span class="step-badge">Resultado: Controle em tempo real por gestos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chamada para Inscrição -->
+        <section class="cta-section">
+            <h2>Garantir Minha Vaga</h2>
+            <p style="margin-top: 0.5rem; color: var(--text-muted);">
+                Inscrições abertas de <strong>13/08 a 14/08 (até às 23h)</strong>.<br>
+                Vagas limitadas (30 alunos) preenchidas por <strong>ordem de inscrição</strong>!
+            </p>
+            <a href="https://forms.gle/1YudVBLecgcEJZuC6" target="_blank" class="btn-register">Preencher Formulário de Inscrição 🚀</a>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Universidade Federal do ABC (UFABC)</p>
+        <p>Desenvolvido para divulgação do Workshop em IA Embarcada e Robótica · 2026</p>
+    </footer>
+
+</body>
+</html>
